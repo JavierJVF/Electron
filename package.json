@@ -1,0 +1,24 @@
+{
+  "name": "app_electron",
+  "version": "1.0.0",
+  "description": "aplicacion de gestion de cuotas",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Electron",
+    "Cuotas",
+    "Pagos",
+    "Gestion"
+  ],
+  "author": "Javier",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^9.2.0"
+  },
+  "dependencies": {
+    "sequelize": "^6.3.4",
+    "sqlite3": "^5.0.0"
+  }
+}
