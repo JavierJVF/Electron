@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Hogares = sequelize.define("hogares", {
+    const Hogar = sequelize.define("hogares", {
         nro_casa: {
             type: DataTypes.TEXT,
             primaryKey: true,
@@ -15,5 +15,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
     
-    return Hogares;
+    return Hogar;
 };
