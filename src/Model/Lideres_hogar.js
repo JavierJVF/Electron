@@ -23,12 +23,16 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true,
         },
-        nro_casa:{
-            type: DataTypes.TEXT,
-            allowNull: false,
-            unique: true,
-        }
     });
+
+    Lider_hogar.associate = function(models) {
+        models.Lideres_hogar.belongsTo(models.Hogares,{
+            foreignKey: 'nro_casa',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
+        });
+        models.Lideres_hogar.hasMany(models.Pagos)
+    };
 
     return Lider_hogar;
 }

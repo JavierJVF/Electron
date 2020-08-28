@@ -15,5 +15,11 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
 
+    Contribucion.associate = function(models){
+        models.Contribuciones.belongsToMany(models.Pagos,{
+            through: models.Pagos_contribuciones
+        });
+    }
+
     return Contribucion;
 };

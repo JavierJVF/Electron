@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         }
     });
+
+    Hogar.associate = function(models) {
+        models.Hogares.hasOne(models.Lideres_hogar);
+    };
     
     return Hogar;
 };

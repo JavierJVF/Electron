@@ -20,11 +20,29 @@ module.exports = (sequelize, DataTypes) => {
         es_dolar:{
             type: DataTypes.INTEGER,
         },
-        cedula_lider_hogar:{
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
     });
+
+    Pago.associate = function(models) {
+        models.Pagos.belongsTo(models.Lideres_hogar,{
+            foreignKey: 'cedula_lider_hogar',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
+        });
+
+        models.Pagos.hasOne(models.Pagos_electronicos);
+
+        models.Pagos.belongsToMany(models.Mensualidades,{
+            through: models.Pagos_mensualidades
+        });
+
+        models.Pagos.belongsToMany(models.Contribuciones,{
+            through: models.Pagos_contribuciones
+        });
+
+        models.Pagos.belongsToMany(models.Reparaciones,{
+            through: models.Pagos_reparaciones
+        });
+    };
 
     return Pago;
 };

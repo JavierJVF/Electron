@@ -9,11 +9,15 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT,
             allowNull: false,
         },
-        id_pago:{
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
     });
+
+    Pago_electronico.associate = function(models){
+        models.Pagos_electronicos.belongsTo(models.Pagos,{
+            foreignKey: 'id_pago',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
+        });
+    };
 
     return Pago_electronico;
 }

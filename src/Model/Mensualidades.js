@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) =>{
-    const mensualidad = sequelize.define("mensualidades",{
+    const Mensualidad = sequelize.define("mensualidades",{
         id_mensualidad:{
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -19,5 +19,11 @@ module.exports = (sequelize, DataTypes) =>{
         },
     });
 
-    return mensualidad;
+    Mensualidad.associate = function(models){
+        models.Mensualidades.belongsToMany(models.Pagos,{
+            through: models.Pagos_mensualidades
+        });
+    }
+
+    return Mensualidad;
 };

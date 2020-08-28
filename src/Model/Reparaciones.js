@@ -19,5 +19,11 @@ module.exports = () => {
         },
     });
 
+    Reparacion.associate = function(models){
+        models.Reparaciones.belongsToMany(models.Pagos,{
+            through: models.Pagos_reparaciones
+        });
+    }
+
     return Reparacion;
 };
