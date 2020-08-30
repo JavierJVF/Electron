@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
 
     Contribucion.associate = function(models){
         models.Contribuciones.belongsToMany(models.Pagos,{
-            through: models.Pagos_contribuciones
+            through: models.Pagos_contribuciones,
+            foreignKey: 'id_contribucion',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
         });
     }
 

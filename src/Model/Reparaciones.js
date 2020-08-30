@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = (sequelize, DataTypes) => {
     const Reparacion = sequelize.define("reparaciones",{
         id_reparacion:{
             type: DataTypes.INTEGER,
@@ -21,7 +21,10 @@ module.exports = () => {
 
     Reparacion.associate = function(models){
         models.Reparaciones.belongsToMany(models.Pagos,{
-            through: models.Pagos_reparaciones
+            through: models.Pagos_reparaciones,
+            foreignKey: 'id_reparacion',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
         });
     }
 

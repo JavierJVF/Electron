@@ -32,15 +32,24 @@ module.exports = (sequelize, DataTypes) => {
         models.Pagos.hasOne(models.Pagos_electronicos);
 
         models.Pagos.belongsToMany(models.Mensualidades,{
-            through: models.Pagos_mensualidades
+            through: models.Pagos_mensualidades,
+            foreignKey: 'id_pago',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
         });
 
         models.Pagos.belongsToMany(models.Contribuciones,{
-            through: models.Pagos_contribuciones
+            through: models.Pagos_contribuciones,
+            foreignKey: 'id_pago',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
         });
 
         models.Pagos.belongsToMany(models.Reparaciones,{
-            through: models.Pagos_reparaciones
+            through: models.Pagos_reparaciones,
+            foreignKey: 'id_pago',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
         });
     };
 

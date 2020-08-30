@@ -18,12 +18,12 @@ const newHogar = {
 
 //llama al metodo desde aqui
 const controllerHogar = require('./Controller/hogaresController.js')
-controllerHogar.create(newHogar)
+//controllerHogar.create(newHogar)
 controllerHogar.read()
 
 const controllerLider = require('./Controller/lideresHogarController.js')
-controllerLider.create(newLider)
-controllerLider.read()
+//controllerLider.create(newLider)
+//controllerLider.read()
 
 //controller.update(newHogar)
 //controller.delete_(newHogar.nro_casa)

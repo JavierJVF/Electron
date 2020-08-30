@@ -21,7 +21,10 @@ module.exports = (sequelize, DataTypes) =>{
 
     Mensualidad.associate = function(models){
         models.Mensualidades.belongsToMany(models.Pagos,{
-            through: models.Pagos_mensualidades
+            through: models.Pagos_mensualidades,
+            foreignKey: 'id_mensualidad',
+            onDelete: 'RESTRICT',
+            onUpdate: 'RESTRICT'
         });
     }
 
