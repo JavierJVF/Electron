@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Pago_electronico.associate = function(models){
         models.Pagos_electronicos.belongsTo(models.Pagos,{
-            foreignKey: 'id_pago',
+            //foreignKey: 'id_pago',
             onDelete: 'RESTRICT',
             onUpdate: 'RESTRICT'
         });

@@ -1,16 +1,17 @@
 const DB = require('./../database');
-const Hogares = DB.Hogares;
+const hogaresController = require('./hogaresController');
+const Pagos = DB.Pagos;
 const Lideres_hogar = DB.Lideres_hogar;
+const Pagos_electronicos = DB.Pagos_electronicos;
 
-async function create(_hogar){
+async function create(_pago_electronico){
     try {
-        const hogar = Hogares.build(_hogar);
-        result = await Hogares.create(_hogar);
+        result = await Pagos_electronicos.create(_pago_electronico);
         if(result){
             console.log("Registro guardado con exito...")
             console.log(result)
         }
-        return result;
+        return result
     } catch (error) {
         console.log(error)
         return 0;
@@ -20,7 +21,7 @@ async function create(_hogar){
 
 async function read(){
     try {
-        const result = (await Hogares.findAll({include : Lideres_hogar}));
+        const result = await Pagos_electronicos.findAll({include : Pagos});
         if(result){console.log(result)}
         return result
     } catch (error) {
@@ -32,13 +33,13 @@ async function read(){
 
 async function findById(id){
     try {
-        const hogar = (await Hogares.findOne({ where: { nro_casa: id }, include : Lideres_hogar}));
-        if(hogar!== null){
-            console.log(hogar)
-            return hogar;
+        const pago = (await Pagos_electronicos.findOne({ where: { pagoIdPago: id }, include : Pagos}));
+        if(lider!== null){
+            console.log(pago)
+            return pago;
         }else {
-            console.log("hogar no encontrado")
-            return result
+            console.log("lider no encontrado")
+            return 0
         }
         
     } catch (error) {
@@ -48,9 +49,9 @@ async function findById(id){
 
 }
 
-async function update(_hogar){
+async function update(_pago_electronico){
     try {
-        result = await Hogares.update(_hogar,{ where: { nro_casa: _hogar.nro_casa }})
+        result = await Pagos_electronicos.update(_pago_electronico,{ where: { nro_referencia: _pago_electronico['nro_referencia'] }})
         if(result){
             console.log("Registro actualizado con exito...")
             console.log(result)
@@ -63,11 +64,11 @@ async function update(_hogar){
 
 }
 
-async function delete_(nro_casa){
+async function delete_(nro_referencia){
     try {
-        const result = await Hogares.destroy({
+        const result = await Pagos_electronicos.destroy({
             where: {
-                nro_casa: nro_casa
+                nro_referencia: nro_referencia
             }
         });
         if(result){console.log("Registro borrado con exito...")}
@@ -76,8 +77,9 @@ async function delete_(nro_casa){
         console.log(error)
         return 0;
     }
-    console.log(_hogar)
+    //console.log(result);
 
 }
 
-module.exports = {create, read, update, delete_, findById}
+
+module.exports = {create, read, update, delete_,findById}

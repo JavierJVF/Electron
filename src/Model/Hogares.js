@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Hogar.associate = function(models) {
-        models.Hogares.hasOne(models.Lideres_hogar);
+        models.Hogares.hasOne(models.Lideres_hogar,{
+                onDelete: 'RESTRICT',
+                onUpdate: 'RESTRICT'
+        });
     };
     
     return Hogar;

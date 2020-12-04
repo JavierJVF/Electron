@@ -1,10 +1,12 @@
 const DB = require('./../database');
+const hogaresController = require('./hogaresController');
 const Lideres_hogar = DB.Lideres_hogar;
+const Hogares = DB.Hogares;
 
 async function create(_lider_hogar){
     try {
         const lideres_hogar = Lideres_hogar.build(_lider_hogar);
-        result = await lideres_hogar.save();
+        result = await Lideres_hogar.create(_lider_hogar);
         if(result){
             console.log("Registro guardado con exito...")
             console.log(result)
@@ -19,9 +21,27 @@ async function create(_lider_hogar){
 
 async function read(){
     try {
-        const result = await Lideres_hogar.findAll();
+        const result = await Lideres_hogar.findAll({include : Hogares});
         if(result){console.log(result)}
         return result
+    } catch (error) {
+        console.log(error)
+        return 0;
+    }
+
+}
+
+async function findById(id){
+    try {
+        const lider = (await Lideres_hogar.findOne({ where: { cedula: id }, include : Hogares}));
+        if(lider!== null){
+            console.log(lider)
+            return lider;
+        }else {
+            console.log("lider no encontrado")
+            return 0
+        }
+        
     } catch (error) {
         console.log(error)
         return 0;
@@ -61,4 +81,29 @@ async function delete_(cedula){
 
 }
 
-module.exports = {create, read, update, delete_}
+async function asignarHogar(data){
+    const lider_hogar =  result = await Lideres_hogar.findOne({ where: { cedula: data['id_lider'] } });
+    const hogar =  result = await Hogares.findOne({ where: { nro_casa: data['id_hogar'] } });
+
+    if (lider_hogar === null) {
+        console.log('Lider Not found!');
+        return 0;
+
+    } else if(hogar === null){
+        console.log('Hogar Not found!');
+        return 0;
+
+    } else {
+        result = hogar.setLideres_hogar(lider_hogar);
+        if (result) {
+            console.log('asignacion Exitosa');
+            return hogar;
+        }else{
+            console.log('Operacion fallida');
+            return 0;
+        }
+
+    }
+}
+
+module.exports = {create, read, update, delete_,asignarHogar,findById}

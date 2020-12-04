@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Pago.associate = function(models) {
         models.Pagos.belongsTo(models.Lideres_hogar,{
-            foreignKey: 'cedula_lider_hogar',
+            //foreignKey: 'cedula_lider_hogar',
             onDelete: 'RESTRICT',
             onUpdate: 'RESTRICT'
         });

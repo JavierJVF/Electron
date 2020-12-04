@@ -26,11 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Lider_hogar.associate = function(models) {
-        models.Lideres_hogar.belongsTo(models.Hogares,{
-            foreignKey: 'nro_casa',
-            onDelete: 'RESTRICT',
-            onUpdate: 'RESTRICT'
-        });
+        models.Lideres_hogar.belongsTo(models.Hogares);
         models.Lideres_hogar.hasMany(models.Pagos)
     };
 

@@ -36,8 +36,14 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 module.exports = db;
 
-(async () => {
+/*try {
+  (async () => {
     await sequelize.sync({ force: true });
     // Code here
   })();
+  
+} catch (error) {
+  
+}
+*/
 
